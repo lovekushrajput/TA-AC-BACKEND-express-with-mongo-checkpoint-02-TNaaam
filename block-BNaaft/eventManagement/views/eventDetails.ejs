@@ -1,0 +1,81 @@
+<% include partial/header%>
+    <section class="container">
+        <article class="article">
+            <img src="/images/<%= event.cover_image %>" alt="<%= event.cover_image %>">
+
+            <h2 class="title">
+                <%= event.title %>
+            </h2>
+            <p class="summary padding-bootom">
+                <%= event.summary %>
+            </p>
+            <h3 class="padding-bootom">
+                <%= event.host %>
+            </h3>
+            <p class="padding-bootom">
+                <%= event.category %>
+            </p>
+            <address class="padding-bootom">
+                <%= event.location %>
+            </address>
+            <span class="padding-bootom">
+                <%= event.likes %>
+            </span> <br>
+            <div class="flex padding-bootom column-gap">
+
+                <a href="/events/<%=event._id %>/likes">
+                    <button>Like</button>
+                </a>
+
+                <a href="/events/<%= event._id %>/dislikes">
+                    <button>Dislike</button>
+                </a>
+            </div>
+            <div class=" flex padding-bootom column-gap">
+                <a href="/events/<%=event._id%>/edit">
+                    <button>Edit</button>
+                </a>
+                <a href="/events/<%=event._id%>/delete">
+                    <button>Delete</button>
+                </a>
+            </div>
+
+            <form action="/events/<%= event._id %>/remark" method="POST">
+                <textarea name="title" placeholder="Title" rows="3"></textarea>
+                <input type="text" name="author" placeholder="Author">
+                <input type="submit" value="Add Remark">
+            </form>
+
+            <hr>
+            <h2 class="h2-remark">Remarks</h2>
+
+            <div>
+                <% event.remarkIds.forEach(remark=>{ %>
+                    <p>
+                        <%= remark.title %>
+                    </p>
+                    <cite>
+                        <%= remark.author%>
+                    </cite>
+                    <div class="flex padding-bootme column-gap">
+                        <span>
+                            <%=remark.likes%>
+                        </span>
+                        <a href="/remarks/<%=remark._id%>/likes"> <button>Like</button></a>
+                        <a href="/remarks/<%=remark._id%>/dislikes"><button>
+                                Dislike
+                            </button></a>
+                    </div>
+                    <div class="flex padding-bootme column-gap">
+                        <a href="/remarks/<%=remark._id%>/Edit"><button>
+                                Edit
+                            </button></a>
+                        <a href="/remarks/<%=remark._id%>/Delete"><button>
+                                Delete
+                            </button></a>
+                    </div>
+                    <% }) %>
+            </div>
+        </article>
+    </section>
+    <% include partial/footer%>
