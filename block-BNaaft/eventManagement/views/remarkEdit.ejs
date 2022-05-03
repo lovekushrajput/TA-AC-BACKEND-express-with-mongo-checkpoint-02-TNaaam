@@ -1,0 +1,8 @@
+<form action="/remarks/<%=remark._id%>" method="POST">
+    <h1>Update Remark</h1>
+    <textarea name="title" placeholder="Title" rows="3">
+        <%=remark.title %>
+    </textarea>
+    <input type="text" name="author" placeholder="Author" value="    <%=remark.author %>">
+    <input type="submit" value="Update Remark">
+</form>

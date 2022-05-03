@@ -1,0 +1,69 @@
+<% include partial/header%>
+    <main class="container">
+        <section class="eventList-section">
+            <article class="col flex-60">
+                <% evnts.forEach( e=> { %>
+                    <div class="parent">
+                        <img src="/images/<%= e.cover_image%>" alt="" class="parent-img">
+                        <div class="child">
+                            <h2>
+                                <%= e.title %>
+                            </h2>
+                            <div>
+                                <span>
+                                    <%= format(e.start_date,'yyyy-MM-dd') %>
+                                </span> -
+                                <span>
+                                    <%= format(e.end_date,'yyyy-MM-dd') %>
+                                </span>
+                                <address>
+                                    <%= e.location %>
+                                </address>
+                            </div>
+                            <a href="/events/<%= e._id %>">
+                                <button>Details</button>
+                            </a>
+                        </div>
+
+                    </div>
+                    <% }) %>
+            </article>
+            <aside class="flex-30">
+                <div>
+                    <a href="/events" class="curser-pointer event">All Events</a>
+                    <!-- filter by category -->
+                    <form action="/events/filter" method="GET">
+                        <label for="category">Filter by category</label>
+                        <select id="category" name="category">
+                            <% category.forEach(elm=>{ %>
+                                <option value="<%=elm %>">
+                                    <%= elm %>
+                                </option>
+                                <% }) %>
+                        </select>
+                        <input type="submit" value="Check" class="curser-pointer">
+                    </form>
+                    <!-- filter by  location-->
+                    <form action="/events/filter" method="GET">
+                        <label for="location">Filter by location</label>
+                        <select name="location" id="location">
+                            <% location.forEach(elm=>{ %>
+                                <option value="<%=elm %>">
+                                    <%= elm %>
+                                </option>
+                                <% }) %>
+                        </select>
+                        <input type="submit" value="Check" class="curser-pointer">
+                    </form>
+                    <!-- filter by dates -->
+                    <form action="/events/filter/" method="GET">
+                        <label for="cars">Filter by date</label>
+                        <input type="date" placeholder="Start Date" name="start">
+                        <input type="date" placeholder="End Date" name="end">
+                        <input type="submit" value="Check" class="curser-pointer">
+                    </form>
+                </div>
+            </aside>
+        </section>
+    </main>
+    <% include partial/footer%>

@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/stylesheets/style.css">
+<div class="form-control">
+    <form action="/events" method="POST" enctype="multipart/form-data">
+        <h2>Add Event</h2>
+        <input type="text" name="title" placeholder="Title">
+        <textarea name="summary" rows="3" placeholder="Summary"></textarea>
+        <input type="text" name="host" placeholder="Host">
+        <input type="date" name="start_date" placeholder="Start-Date">
+        <input type="date" name="end_date" placeholder="End-Date">
+        <input type="file" name="cover_image">
+        <input type="text" name="event_category" placeholder="Event Category">
+        <input type="text" name="location" placeholder="Location">
+        <div>
+            <input type="submit" value="Add Event">
+        </div>
+    </form>
+</div>

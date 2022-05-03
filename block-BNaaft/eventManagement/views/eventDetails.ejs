@@ -1,0 +1,94 @@
+<% include partial/header%>
+    <section class="container">
+        <article class="article">
+            <img src="/images/<%= event.cover_image %>" alt="<%= event.cover_image %>">
+
+            <h2 class="title">
+                <%= event.title %>
+            </h2>
+           
+            <div class="Date">
+              <h3><%=format(event.start_date, 'yyyy-MM-dd') %></h3> -
+                <p>
+                <%= format(event.end_date, 'yyyy-MM-dd') %>
+                </p>
+            </div>
+
+            <p class="summary padding-bootom">
+                <%= event.summary %>
+            </p>
+            <h3 class="padding-bootom">
+               Host: <%= event.host %>
+            </h3>
+            <p class="padding-bootom">
+               Category: <%= event.event_category %>
+            </p>
+            <address class="padding-bootom">
+                <%= event.location %>
+            </address>
+            <span class="padding-bootom">
+                <%= event.likes %>
+            </span> <br>
+            <div class="flex padding-bootom column-gap ">
+
+                <a href="/events/<%=event._id %>/likes" class="btn-like">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                </a>
+
+                <a href="/events/<%= event._id %>/dislikes" class="btn-like">
+                    <i class="fa-solid fa-thumbs-down"></i>
+                </a>
+            </div>
+            <div class=" flex padding-bootom column-gap">
+                <a href="/events/<%=event._id%>/edit">
+                    <button class="edit">Edit</button>
+                </a>
+                <a href="/events/<%=event._id%>/delete">
+                    <button class="delete">Delete</button>
+                </a>
+            </div>
+
+            <form action="/events/<%= event._id %>/remark" method="POST">
+                <textarea name="title" placeholder="Title" rows="3"></textarea>
+                <input type="text" name="author" placeholder="Author">
+                <input type="submit" value="Add Remark">
+            </form>
+
+            <hr>
+            <h2 class="h2-remark">Remarks</h2>
+
+            <div>
+                <% event.remarkIds.forEach(remark=>{ %>
+                    <div class="remark-info">
+                        <p>
+                            <%= remark.title %>
+                        </p>
+                        <cite>
+                            <%= remark.author%>
+                        </cite>
+
+
+                        <div class="flex padding-bootme column-gap btn-info">
+                            <span>
+                                <%=remark.likes%>
+                            </span>
+                            <a href="/remarks/<%=remark._id%>/likes" class="btn-like"> <i
+                                    class="fa-solid fa-thumbs-up"></i></a>
+                            <a href="/remarks/<%=remark._id%>/dislikes" class="btn-like">
+                                <i class="fa-solid fa-thumbs-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex padding-bootme column-gap margin-top">
+                        <a href="/remarks/<%=remark._id%>/Edit"><button class="edit btnEdit-2">
+                                Edit
+                            </button></a>
+                        <a href="/remarks/<%=remark._id%>/Delete"><button class="delete btnEdit-2">
+                                Delete
+                            </button></a>
+                    </div>
+                    <% }) %>
+            </div>
+        </article>
+    </section>
+    <% include partial/footer%>
