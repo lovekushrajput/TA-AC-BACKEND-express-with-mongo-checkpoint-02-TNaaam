@@ -6,14 +6,22 @@
             <h2 class="title">
                 <%= event.title %>
             </h2>
+           
+            <div class="Date">
+              <h3><%=format(event.start_date, 'yyyy-MM-dd') %></h3> -
+                <p>
+                <%= format(event.end_date, 'yyyy-MM-dd') %>
+                </p>
+            </div>
+
             <p class="summary padding-bootom">
                 <%= event.summary %>
             </p>
             <h3 class="padding-bootom">
-                <%= event.host %>
+               Host: <%= event.host %>
             </h3>
             <p class="padding-bootom">
-                <%= event.event_category %>
+               Category: <%= event.event_category %>
             </p>
             <address class="padding-bootom">
                 <%= event.location %>
