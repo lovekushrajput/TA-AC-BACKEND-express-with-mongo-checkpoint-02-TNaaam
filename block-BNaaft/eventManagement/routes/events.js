@@ -4,8 +4,7 @@ var multer = require('multer')
 var Event = require('../models/Event')
 var Remark = require('../models/Remark')
 var fs = require('fs');
-const { db } = require('../models/Remark');
-const {format} = require('date-fns');
+const { format } = require('date-fns');
 
 let storage = multer.diskStorage({
   //destination file
@@ -26,7 +25,10 @@ let upload = multer({
 router.get('/', function (req, res, next) {
   Event.find({}, (err, evnts) => {
     if (err) return next(err)
-    res.render('eventList', { evnts })
+    Event.distinct('event_category', (err, category) => {
+      res.render('eventList', { evnts, category: category })
+    })
+
   })
 });
 
@@ -46,34 +48,42 @@ router.post('/', upload.single('cover_image'), (req, res, next) => {
   })
 })
 
-router.get('/filter',(req,res,next)=>{
-  // console.log(req.query);
-  const {category, location, start, end} = req.query;
-  // console.log(category, location, start, end);
 
+//filters
+router.get('/filter', (req, res, next) => {
+  const { category, location, start, end } = req.query;
+  //filter by category
 
-  if(category){
-    console.log('cat', category);
-  }else if(location){
-    console.log('loc', location)
-  }else if(start || end){
-    console.log('dates', start, end  );
+  if (category) {
+    Event.find({ event_category: category }, (err, evnts) => {
+      if (err) return next(err)
+      Event.distinct('event_category', (err, category) => {
+        if (err) return next(err)
+        res.render('eventList', { evnts, category: category })
+      })
+
+    })
+    //filter by location
+  } else if (location) {
+    Event.find({ location: location }, (err, evnts) => {
+      if (err) return next(err)
+      res.render('eventList', { evnts })
+    })
+    //filter by date
+  } else if (start || end) {
+    Event.find({ start_date: { $gte: start }, end_date: { $lte: end } }, (err, evnts) => {
+      if (err) return next(err)
+      res.render('eventList', { evnts })
+    })
   }
 
 });
-//filter by date
-// router.post('/date', (req, res, next) => {
-//   console.log(req.body.start)
-// Event.find({ start_date: { $gte: req.body.start }, end_date: { $lte: req.body.end } }, (err, evnts) => {
-//     if (err) return next(err)
-//     res.render('eventList',{evnts})
-//   })
-// })
 
 
 // event-Details
 router.get('/:id', (req, res, next) => {
   let id = req.params.id
+  // capture the id and populate the remarkId
   Event.findById(id).populate('remarkIds').exec((err, event) => {
     if (err) return next(err)
     res.render('eventDetails', { event })
@@ -85,29 +95,29 @@ router.get('/:id/edit', (req, res, next) => {
   let id = req.params.id
   Event.findById(id, (err, event) => {
     if (err) return next(err)
-    res.render('eventEdit', { event, format, startDate: format(event.start_date, 'yyyy-MM-dd'), endDate: format(event.end_date, 'yyyy-MM-dd') })
+    res.render('eventEdit', { event, format })
   })
 })
 
 
 //capture and update
-router.post('/:id', upload.single('cover_image'), (req, res,next) => {
+router.post('/:id', upload.single('cover_image'), (req, res, next) => {
   let id = req.params.id
   let new_image = ''
-  if(req.file){
+  if (req.file) {
     new_image = req.file.filename
     try {
-      fs.unlinkSync('.public/images/'+ req.body.cover_image)
+      fs.unlinkSync('.public/images/' + req.body.cover_image)
     } catch (error) {
       console.log(error)
     }
-  }else{
+  } else {
     new_image = req.body.cover_image
   }
-  req.body.cover_image=new_image
-  Event.findByIdAndUpdate(id,req.body,(err,event)=>{
-if(err) return next(err)
-res.redirect('/events/' + id)
+  req.body.cover_image = new_image
+  Event.findByIdAndUpdate(id, req.body, (err, event) => {
+    if (err) return next(err)
+    res.redirect('/events/' + id)
   })
 })
 

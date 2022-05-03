@@ -129,7 +129,7 @@ table {
 }
 /* custom */
 body {
-  font-family: "Assistant", sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: rgb(240, 242, 245);
 }
 
@@ -150,9 +150,62 @@ a {
 .flex-30{
   flex: 0 1 30;
 }
+.index{
+  height: 100vh;
+    background-image: url('../images/brand.jpg');
+   background-repeat: no-repeat;
+  background-origin: border-box; 
+   background-size: cover; 
+   background-color: #65676b;
+}
+.index h1{
+  text-align: center;
+  font-size: 2.5rem;
+  color: white;
+  z-index: 12345;
+  font-weight: 700;
+}
 
+.index a{
+  text-align: center;
+  display: inline-block;
+  margin-top: 1.5rem;
+  border: 1px solid white;
+  padding: 0.7rem 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.index-header{
+  background-color: rgb(0, 0, 0);
+}
+
+.index-header  a{
+color: white;
+}
+
+.color{
+  color: black;
+}
+.index article{
+  display: flex;
+  align-items: center;
+  height: 70vh;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightboxOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(40, 38, 38);
+width: 100%;
+opacity: 0.3;
+}
 header {
-  background-color: white;
+  background-color: rgba(255, 253, 253, 0.9);
   padding: 0.7rem 1rem;
 }
 
@@ -162,10 +215,26 @@ header ul {
   align-items: center;
 }
 
-header a {
+header div{
+  display: flex;
+}
+
+.brand{
+  font-size: 2rem;
+
+}
+
+.brand a{
   font-weight: 800;
+  font-size: 2rem;
+  /* color: black; */
+  font-family: 'Icaland', cursive;
+}
+
+header a {
+  font-family: 'Reegae One', sans-serif;
   font-size: 1.3rem;
-  background-color: rgb(240, 242, 245);
+  /* background-color: rgb(240, 242, 245); */
   color: black;
   padding: 0.5rem;
 }
@@ -258,17 +327,27 @@ width: 65%;
 }
 
 .child h2 {
-  font-size: 3rem;
-  font-family: "Tangerine", cursive;
-  color: goldenrod;
-  padding-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-family: 'Assistant', sans-serif;
+  color: rgb(50, 135, 220);
+  padding-bottom: 0.7rem;
   font-weight: 600;
+  text-transform: capitalize;
 }
 
+.event{
+  color: #65676b;
+  font-size: 1.3rem;
+  background-color:  rgb(50, 135, 220);
+  color: white;
+  display: inline-block;
+  width: 30%;
+  padding: 0.4rem 0.8rem;
+}
 .child span {
   display: inline-block;
   padding-bottom: 0.6rem;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   font-weight: 600;
 }
 .child address {
@@ -311,6 +390,10 @@ aside form{
   padding: 0.7rem;
    row-gap: 0.8rem;
 }
+
+.curser-pointer{
+  cursor: pointer;
+}
 /* event-details */
 .article {
   margin: 2rem 0;
@@ -349,6 +432,10 @@ aside form{
   padding: 0rem 0.3rem;
   outline-color: rgb(24, 118, 242);
 }
+
+.article p{
+  color: grey;
+}
 .flex {
   display: flex;
 }
@@ -370,4 +457,61 @@ span {
   margin-bottom: 1rem;
 }
 
+.btn-like{
+  color: rgb(24, 118, 242);
+}
+.edit{
+  background-color: rgb(55,182,103);
+  color: white;
+  padding: 0.3rem 0.5rem;
+  border: transparent;
+}
+
+.delete{
+  background-color: rgb(203, 124, 26);
+  color: white;
+  padding: 0.3rem 0.5rem;
+  border: transparent;
+}
+
+address{
+  font-style: italic;
+}
+
+.remark-info{
+  background-color: rgba(202, 212, 231, 0.637);
+  display: inline-block;
+ padding-top: 0.5rem;
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  width: 15%;
+  margin-top: 1rem;
+}
+
+.remark-info p ,cite{
+  margin-left: 0.5rem;
+  padding-bottom: 0.3rem;
+}
+
+.h2-remark cite{
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+.btn-info{
+  display: flex;
+  padding-left: 0.7rem;
+  margin-top: 0.3rem;
+  border-top: 1px solid rgb(146, 146, 146);
+padding-top: 0.2rem;
+padding-bottom: 0.2rem;
+}
+
+.margin-top{
+  margin-top: 0.3rem;
+}
+
+.btnEdit-2{
+  padding: 0.1rem 0.7rem;
+}
 /* footer */
