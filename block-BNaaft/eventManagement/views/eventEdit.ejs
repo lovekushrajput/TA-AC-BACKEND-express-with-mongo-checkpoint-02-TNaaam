@@ -8,7 +8,7 @@
             <%= event.summary %>
         </textarea>
         <input type="text" name="host" placeholder="Host" value=" <%= event.host %> ">
-        <input type="date" name="start_date" placeholder="Start-Date" value="<%= startDate %>">
+        <input type="date" name="start_date" placeholder="Start-Date" value="<%= format(event.start_date,'yyyy-MM-dd') %>">
         <input type="date" name="end_date" placeholder="End-Date" value="<%= format(event.end_date , 'yyyy-MM-dd') %>">
         <input type="file" name="cover_image" placeholder="Cover-Image">
         <img src="/images/<%= event.cover_image %>" alt="<%= event.cover_image %>">

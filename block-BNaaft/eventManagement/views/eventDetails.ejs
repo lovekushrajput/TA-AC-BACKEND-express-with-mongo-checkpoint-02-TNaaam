@@ -13,7 +13,7 @@
                 <%= event.host %>
             </h3>
             <p class="padding-bootom">
-                <%= event.category %>
+                <%= event.event_category %>
             </p>
             <address class="padding-bootom">
                 <%= event.location %>
@@ -21,22 +21,22 @@
             <span class="padding-bootom">
                 <%= event.likes %>
             </span> <br>
-            <div class="flex padding-bootom column-gap">
+            <div class="flex padding-bootom column-gap ">
 
-                <a href="/events/<%=event._id %>/likes">
-                    <button>Like</button>
+                <a href="/events/<%=event._id %>/likes" class="btn-like">
+                    <i class="fa-solid fa-thumbs-up"></i>
                 </a>
 
-                <a href="/events/<%= event._id %>/dislikes">
-                    <button>Dislike</button>
+                <a href="/events/<%= event._id %>/dislikes" class="btn-like">
+                    <i class="fa-solid fa-thumbs-down"></i>
                 </a>
             </div>
             <div class=" flex padding-bootom column-gap">
                 <a href="/events/<%=event._id%>/edit">
-                    <button>Edit</button>
+                    <button class="edit">Edit</button>
                 </a>
                 <a href="/events/<%=event._id%>/delete">
-                    <button>Delete</button>
+                    <button class="delete">Delete</button>
                 </a>
             </div>
 
@@ -51,26 +51,31 @@
 
             <div>
                 <% event.remarkIds.forEach(remark=>{ %>
-                    <p>
-                        <%= remark.title %>
-                    </p>
-                    <cite>
-                        <%= remark.author%>
-                    </cite>
-                    <div class="flex padding-bootme column-gap">
-                        <span>
-                            <%=remark.likes%>
-                        </span>
-                        <a href="/remarks/<%=remark._id%>/likes"> <button>Like</button></a>
-                        <a href="/remarks/<%=remark._id%>/dislikes"><button>
-                                Dislike
-                            </button></a>
+                    <div class="remark-info">
+                        <p>
+                            <%= remark.title %>
+                        </p>
+                        <cite>
+                            <%= remark.author%>
+                        </cite>
+
+
+                        <div class="flex padding-bootme column-gap btn-info">
+                            <span>
+                                <%=remark.likes%>
+                            </span>
+                            <a href="/remarks/<%=remark._id%>/likes" class="btn-like"> <i
+                                    class="fa-solid fa-thumbs-up"></i></a>
+                            <a href="/remarks/<%=remark._id%>/dislikes" class="btn-like">
+                                <i class="fa-solid fa-thumbs-down"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="flex padding-bootme column-gap">
-                        <a href="/remarks/<%=remark._id%>/Edit"><button>
+                    <div class="flex padding-bootme column-gap margin-top">
+                        <a href="/remarks/<%=remark._id%>/Edit"><button class="edit btnEdit-2">
                                 Edit
                             </button></a>
-                        <a href="/remarks/<%=remark._id%>/Delete"><button>
+                        <a href="/remarks/<%=remark._id%>/Delete"><button class="delete btnEdit-2">
                                 Delete
                             </button></a>
                     </div>
