@@ -26,10 +26,15 @@ router.get('/', function (req, res, next) {
   Event.find({}, (err, evnts) => {
     if (err) return next(err)
     Event.distinct('event_category', (err, category) => {
-      res.render('eventList', { evnts, category: category })
+      if (err) return next(err)
+      Event.distinct('location', (err, location) => {
+        if (err) return next(err)
+        res.render('eventList', { evnts, category, location, format })
+      })
     })
 
   })
+
 });
 
 
@@ -51,29 +56,44 @@ router.post('/', upload.single('cover_image'), (req, res, next) => {
 
 //filters
 router.get('/filter', (req, res, next) => {
+  let query = req.query
   const { category, location, start, end } = req.query;
   //filter by category
-
   if (category) {
     Event.find({ event_category: category }, (err, evnts) => {
       if (err) return next(err)
       Event.distinct('event_category', (err, category) => {
         if (err) return next(err)
-        res.render('eventList', { evnts, category: category })
+        Event.distinct('location', (err, location) => {
+          if (err) return next(err)
+          res.render('eventList', { evnts, category, location, format })
+        })
       })
-
     })
-    //filter by location
+
+    //   //filter by location
   } else if (location) {
     Event.find({ location: location }, (err, evnts) => {
       if (err) return next(err)
-      res.render('eventList', { evnts })
+      Event.distinct('event_category', (err, category) => {
+        if (err) return next(err)
+        Event.distinct('location', (err, location) => {
+          if (err) return next(err)
+          res.render('eventList', { evnts, category, location, format })
+        })
+      })
     })
     //filter by date
   } else if (start || end) {
     Event.find({ start_date: { $gte: start }, end_date: { $lte: end } }, (err, evnts) => {
       if (err) return next(err)
-      res.render('eventList', { evnts })
+      Event.distinct('event_category', (err, category) => {
+        if (err) return next(err)
+        Event.distinct('location', (err, location) => {
+          if (err) return next(err)
+          res.render('eventList', { evnts, category, location, format })
+        })
+      })
     })
   }
 
@@ -86,7 +106,7 @@ router.get('/:id', (req, res, next) => {
   // capture the id and populate the remarkId
   Event.findById(id).populate('remarkIds').exec((err, event) => {
     if (err) return next(err)
-    res.render('eventDetails', { event })
+    res.render('eventDetails', { event ,format})
   })
 })
 
@@ -163,6 +183,8 @@ router.get('/:id/dislikes', (req, res, next) => {
         if (err) return next(err)
         res.redirect('/events/' + id)
       })
+    } else {
+      res.redirect('/events/' + id)
     }
   })
 

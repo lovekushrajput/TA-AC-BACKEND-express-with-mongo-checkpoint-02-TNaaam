@@ -11,10 +11,10 @@
                             </h2>
                             <div>
                                 <span>
-                                    <%= e.start_date %>
+                                    <%= format(e.start_date,'yyyy-MM-dd') %>
                                 </span> -
                                 <span>
-                                    <%= e.end_date %>
+                                    <%= format(e.end_date,'yyyy-MM-dd') %>
                                 </span>
                                 <address>
                                     <%= e.location %>
@@ -37,7 +37,7 @@
                         <select id="category" name="category">
                             <% category.forEach(elm=>{ %>
                                 <option value="<%=elm %>">
-                                    <%= elm%>
+                                    <%= elm %>
                                 </option>
                                 <% }) %>
                         </select>
@@ -47,11 +47,11 @@
                     <form action="/events/filter" method="GET">
                         <label for="location">Filter by location</label>
                         <select name="location" id="location">
-                            <% for (let j=0; j < evnts.length; j++){ %>
-                                <option value="<%= evnts[j].location %>">
-                                    <%= evnts[j].location %>
+                            <% location.forEach(elm=>{ %>
+                                <option value="<%=elm %>">
+                                    <%= elm %>
                                 </option>
-                                <% } %>
+                                <% }) %>
                         </select>
                         <input type="submit" value="Check" class="curser-pointer">
                     </form>

@@ -510,7 +510,15 @@ padding-bottom: 0.2rem;
 .margin-top{
   margin-top: 0.3rem;
 }
+.Date{
+  display: flex;
+  margin-bottom: 0.7rem;
+  color: rgb(24, 118, 242);
+}
 
+.Date  p{
+  color: crimson;
+}
 .btnEdit-2{
   padding: 0.1rem 0.7rem;
 }
